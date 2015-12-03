@@ -1,9 +1,14 @@
 # discrete-stego
 Trying to move steganography in digital images past the compression used by many image hosting sites.
 
+Image specs:
+500 x 500 pixels
+144 pixels/inch
+BMP file at 24 bit depth
+
 Image sites being used:
-Facebook
-Twitter
-Imgur
+Facebook - changes images to JPG
+Twitter - does not support BMP
+Imgur - changes images to PNG
 Dropbox
 Google Photos
