@@ -12,3 +12,6 @@ Twitter - does not support BMP
 Imgur - changes images to PNG
 Dropbox
 Google Photos
+
+Filter:
+Gaussian blur, radius as 1 pixel
