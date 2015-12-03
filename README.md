@@ -8,7 +8,6 @@ BMP file at 24 bit depth
 
 Image sites being used:
 Facebook - changes images to JPG
-Twitter - does not support BMP
 Imgur - changes images to PNG
 Dropbox
 Google Photos
