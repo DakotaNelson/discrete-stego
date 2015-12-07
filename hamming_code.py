@@ -18,6 +18,12 @@ def cut(msg):
     hamming(group)
 
 def hamming(sub_msg):
+  # create parity bits for (1,2,3) (2,3,4) (1,3,4)
+  p1 = (0, 1, 2)
+  p2 = (1, 2, 3)
+  p3 = (0, 2, 3)
+
+def parity():
   pass
 
 if __name__ == '__main__':
