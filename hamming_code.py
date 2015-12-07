@@ -19,12 +19,18 @@ def cut(msg):
 
 def hamming(sub_msg):
   # create parity bits for (1,2,3) (2,3,4) (1,3,4)
-  p1 = (0, 1, 2)
-  p2 = (1, 2, 3)
-  p3 = (0, 2, 3)
+  p1 = parity( ,(0, 1, 2))
+  p2 = parity( ,(1, 2, 3))
+  p3 = parity( ,(0, 2, 3))
+
+  # need to get 3 parity bits using above, then add them to message
+  return sub_msg + p1 + p2 + p3
 
 def parity():
+  # apply the matrix for general parity
   pass
+
+# TODO: implement decoding of hamming (reverse process + checking)
 
 if __name__ == '__main__':
   input_msg = '011100000110100101110000'
