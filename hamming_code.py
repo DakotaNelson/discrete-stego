@@ -15,24 +15,24 @@ def cut(msg):
 
   # run hamming for each chunk
   for group in chunks:
-    hamming(group)
+    hamming(group.split())
 
 def hamming(sub_msg):
-  # create parity bits for (1,2,3) (2,3,4) (1,3,4)
-  p1 = parity(sub_msg, (0, 1, 2))
-  print p1
-  p2 = parity(sub_msg, (1, 2, 3))
-  print p2
-  p3 = parity(sub_msg, (0, 2, 3))
-  print p3
-
+  # create parity bits using transition matrix
+  transition = [[0,1,1,1,0,0,0],
+                [1,0,1,0,1,0,0],
+                [1,1,0,0,0,1,0],
+                [1,1,1,0,0,0,1]]
+  pass
+  
   # need to get 3 parity bits using above, then add them to message
-  print sub_msg + p1 + p2 + p3
-  return sub_msg + p1 + p2 + p3
+  # print sub_msg + p1 + p2 + p3
+  # return sub_msg + p1 + p2 + p3
 
 def parity(sub_msg, indices):
   # apply the matrix for general parity
 # TODO: implement proper parity with matrices
+  pass
 
 # TODO: implement decoding of hamming (reverse process + checking)
 
