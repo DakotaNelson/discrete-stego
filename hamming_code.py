@@ -51,6 +51,14 @@ def decode(message):
   transition = np.mat('1,0,0,0,1,1,1;0,1,0,1,0,1,1;0,0,1,1,1,0,1')
 
   result = transition * message
+
+  # mod 2 everything
+  for i in range(len(result)):
+    if result[i] % 2 == 1:
+      result[i] = 1
+    elif result[i] % 2 == 0:
+      result[i] = 0
+
   print result
 
 if __name__ == '__main__':
