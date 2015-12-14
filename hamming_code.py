@@ -2,6 +2,7 @@
 # able to detect/correct for single-bit error
 import sys
 import textwrap
+import numpy as np
 
 # cut up message to 4 bit sections to encode
 def cut(msg):
@@ -15,27 +16,32 @@ def cut(msg):
 
   # run hamming for each chunk
   for group in chunks:
-    hamming(group.split())
+    # create list of the values for matrix multiplication
+    val = []
+    for ch in str(group):
+      val.append(int(ch))
+
+    hamming(np.mat(val))
 
 def hamming(sub_msg):
   # create parity bits using transition matrix
-  transition = [[0,1,1,1,0,0,0],
-                [1,0,1,0,1,0,0],
-                [1,1,0,0,0,1,0],
-                [1,1,1,0,0,0,1]]
-  pass
-  
-  # need to get 3 parity bits using above, then add them to message
-  # print sub_msg + p1 + p2 + p3
-  # return sub_msg + p1 + p2 + p3
+  transition = np.mat('0,1,1,1,0,0,0;1,0,1,0,1,0,0;1,1,0,0,0,1,0;1,1,1,0,0,0,1')
 
-def parity(sub_msg, indices):
-  # apply the matrix for general parity
-# TODO: implement proper parity with matrices
-  pass
+  result =  sub_msg * transition
+  # convert back to list
+  result = list(np.array(result).reshape(-1,))
+
+  # replace 2 with 0
+  for i in range(len(result)):
+    if result[i] % 2 == 1:
+      result[i] = 1
+    elif result[i] % 2 == 0:
+      result[i] = 0
+
+  print result
 
 # TODO: implement decoding of hamming (reverse process + checking)
 
 if __name__ == '__main__':
-  input_msg = '1010'
+  input_msg = '1011'
   cut(input_msg)
