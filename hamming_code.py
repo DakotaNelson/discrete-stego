@@ -5,23 +5,35 @@ import textwrap
 import numpy as np
 
 # cut up message to 4 bit sections to encode
-def cut(msg):
-  # check if divisible by 4, if not add buffer 0s to front
-  if len(msg) % 4 != 0:
-    left = 4 - (len(msg) % 4)
-    msg = left * '0' + msg
+def cut(msg, encode):
+  # check how to cut message:
+  # if encode = 1, cut into 4s
+  # if encode = 0, cut into 7s
+  if encode == 1:
+    # check if divisible by 4, if not add buffer 0s to front
+    if len(msg) % 4 != 0:
+      left = 4 - (len(msg) % 4)
+      msg = left * '0' + msg
 
-  # slice message into 4 bit chunks
-  chunks = textwrap.wrap(msg, 4)
+    # slice message into 4 bit chunks
+    chunks = textwrap.wrap(msg, 4)
 
-  # run hamming for each chunk
-  for group in chunks:
-    # create list of the values for matrix multiplication
-    val = []
-    for ch in str(group):
-      val.append(int(ch))
+    # run hamming for each chunk
+    for group in chunks:
+      # create list of the values for matrix multiplication
+      val = []
+      for ch in str(group):
+        val.append(int(ch))
 
-    hamming(np.mat(val))
+      hamming(np.mat(val))
+
+  if encode == 0:
+    # slice message into 7 bit chunks
+    chunks = textwrap.wrap(msg, 7)
+
+    # run decode for each chunk
+    for goup in chunks:
+      decode(msg)
 
 def hamming(sub_msg):
   # create parity bits using transition matrix
@@ -61,8 +73,7 @@ def mod(msg):
   print msg
 
 if __name__ == '__main__':
-  if len(sys.argv) > 1:
-    decode(sys.argv[1])
+  if len(sys.argv) <= 2:
+    print 'Wrong inputs. Example: hamming_code.py 1011 1'
   else:
-    input_msg = '1010'
-    cut(input_msg)
+    cut(str(sys.argv[1]), int(sys.argv[2]))
