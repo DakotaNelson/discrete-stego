@@ -40,8 +40,22 @@ def hamming(sub_msg):
 
   print result
 
-# TODO: implement decoding of hamming (reverse process + checking)
+def decode(message):
+  # organize message into 1-column matrix
+  val = []
+  for ch in str(message):
+    val.append([int(ch)])
+  message = np.mat(val)
+
+  # decoding matrix
+  transition = np.mat('1,0,0,0,1,1,1;0,1,0,1,0,1,1;0,0,1,1,1,0,1')
+
+  result = transition * message
+  print result
 
 if __name__ == '__main__':
-  input_msg = '1011'
-  cut(input_msg)
+  if len(sys.argv) > 1:
+    decode(sys.argv[1])
+  else:
+    input_msg = '1010'
+    cut(input_msg)
